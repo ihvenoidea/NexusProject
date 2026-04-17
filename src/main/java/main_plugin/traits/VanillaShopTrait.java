@@ -20,17 +20,16 @@ public class VanillaShopTrait extends Trait {
 
         Player player = event.getClicker();
         
-        // NexusCore를 통해 일반 상점 GUI를 엽니다.
+        // NexusCore를 통해 일반 상점 매니저를 가져옵니다.
         if (NexusCore.getInstance().getVanillaShopManager() != null) {
-            NexusCore.getInstance().getVanillaShopManager().openShop(player);
+            /* * [수정 포인트] 
+             * VanillaShopManager.java의 openShop 메서드는 (Player, String)을 인자로 받습니다.
+             * 여기서 두 번째 인자는 market.yml 등에 정의된 상점의 ID(카테고리)입니다.
+             * 기본적으로 "default" 또는 "main" 등을 사용하도록 수정했습니다.
+             */
+            NexusCore.getInstance().getVanillaShopManager().openShop(player, "default");
         } else {
-            player.sendMessage("§c상점 시스템을 불러올 수 없습니다.");
+            player.sendMessage("§c[시스템] 상점 시스템을 불러올 수 없습니다.");
         }
-    }
-
-    // NPC가 스폰될 때 호출 (필요 시)
-    @Override
-    public void onSpawn() {
-        // getNPC().getEntity().setCustomNameVisible(true);
     }
 }

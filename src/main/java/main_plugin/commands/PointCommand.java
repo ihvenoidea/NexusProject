@@ -16,17 +16,24 @@ public class PointCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        // 1. 명령어를 보낸 주체가 플레이어인지 확인
         if (!(sender instanceof Player)) {
             sender.sendMessage("게임 안에서만 사용 가능합니다.");
             return true;
         }
 
         Player player = (Player) sender;
-        // 포인트 상점(조공 상점) GUI를 엽니다.
-        // plugin.getPointShopManager().openShop(player); 
-        // (현재 구현된 포인트 상점 호출 메서드에 맞춰 수정하세요)
+
+        // 2. NexusCore를 통해 PointShopManager를 가져와서 상점 열기
+        // PointShopManager는 CommandExecutor이기도 하므로 직접 onCommand를 호출하거나 
+        // 전용 openShopGui 메서드를 public으로 전환하여 호출할 수 있습니다.
+        if (plugin.getPointShopManager() != null) {
+            // PointShopManager의 onCommand는 인자들을 내부적으로 처리하여 GUI를 엽니다.
+            plugin.getPointShopManager().onCommand(player, command, label, args);
+        } else {
+            player.sendMessage(ChatColor.RED + "상점 시스템을 로드할 수 없습니다.");
+        }
         
-        player.sendMessage(ChatColor.GREEN + "포인트 상점을 엽니다.");
         return true;
     }
 }

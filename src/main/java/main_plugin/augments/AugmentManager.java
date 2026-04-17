@@ -1,6 +1,7 @@
 package main_plugin.augments;
 
 import main_plugin.NexusCore;
+import main_plugin.user.UserData;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
@@ -25,8 +26,6 @@ public class AugmentManager implements Listener {
 
     public AugmentManager(NexusCore plugin) {
         this.plugin = plugin;
-        // 메인 클래스에서 이벤트를 등록하기 때문에 여기서는 생성만 담당하거나 
-        // NexusCore에서 직접 등록하도록 설계되었습니다.
     }
 
     /**
@@ -48,20 +47,21 @@ public class AugmentManager implements Listener {
      * 설정을 다시 불러옵니다. (ConfigHandler에서 호출됨)
      */
     public void loadConfigs() {
-        // 기존 쿨타임 및 등록 정보 초기화 (필요 시)
-        // registeredAugments.clear(); 
-        
-        // TODO: ConfigHandler에서 읽어온 정보를 바탕으로 증강체 객체들을 재등록하는 로직 추가
+        // TODO: ConfigHandler 및 augments.yml에서 읽어온 정보를 바탕으로 증강체 객체들을 재등록하는 로직
         plugin.getLogger().info("AugmentManager 설정을 성공적으로 리로드했습니다.");
     }
 
     /**
      * 플레이어가 가진 모든 증강체를 체크하고 실행 조건을 확인합니다.
+     * [수정] UserData의 최신 구조와 연동하여 증강체를 트리거합니다.
      */
     public void triggerAugments(Player player, Event event) {
+        // NexusUser 대신 우리가 통일하기로 한 UserData 클래스를 사용합니다.
         plugin.getUserManager().getUser(player.getUniqueId()).ifPresent(user -> {
+            // 유저가 보유한 증강체 리스트를 순회합니다.
             for (String augmentId : user.getAugments()) {
                 getAugment(augmentId).ifPresent(augment -> {
+                    // 쿨타임이 끝났는지 확인 후 실행합니다.
                     if (isCooldownOver(player, augment)) {
                         augment.execute(player, event);
                         setCooldown(player, augment);
@@ -71,10 +71,11 @@ public class AugmentManager implements Listener {
         });
     }
 
-    // --- 이벤트 핸들러 ---
+    // --- 이벤트 핸들러: 증강체가 발동될 타이밍 정의 ---
 
     @EventHandler
     public void onPlayerAttack(EntityDamageByEntityEvent event) {
+        // 공격자가 플레이어일 때 증강체 효과 체크
         if (event.getDamager() instanceof Player player) {
             triggerAugments(player, event);
         }
@@ -82,6 +83,7 @@ public class AugmentManager implements Listener {
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
+        // 상호작용 시 증강체 효과 체크 (예: 우클릭 발동 스킬 등)
         triggerAugments(event.getPlayer(), event);
     }
 

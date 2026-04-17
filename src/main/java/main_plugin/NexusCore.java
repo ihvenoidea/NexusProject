@@ -11,7 +11,7 @@ import main_plugin.gui.VanillaShopManager;
 import main_plugin.politics.SiegeManager;
 import main_plugin.user.PlayerListener;
 import main_plugin.user.UserManager;
-import main_plugin.traits.VanillaShopTrait; // Trait 클래스 경로 확인 필요
+import main_plugin.traits.VanillaShopTrait; // [수정] 올바른 경로로 통일
 
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.trait.TraitInfo;
@@ -46,7 +46,7 @@ public class NexusCore extends JavaPlugin {
         saveDefaultConfig();
         createMarketConfig();
 
-        // 2. DB 연결 (getDbManager 호환)
+        // 2. DB 연결
         this.databaseManager = new DatabaseManager(this);
         databaseManager.connect(
             getConfig().getString("database.host", "localhost"),
@@ -61,15 +61,16 @@ public class NexusCore extends JavaPlugin {
             setupEconomy();
         }
 
-        // 4. 매니저 초기화
+        // 4. 매니저 초기화 (순서 주의: DB와 유저 매니저가 우선)
         this.userManager = new UserManager(this);
         this.augmentManager = new AugmentManager(this);
         this.siegeManager = new SiegeManager(this);
         this.vanillaShopManager = new VanillaShopManager(this);
         this.pointShopManager = new PointShopManager(this);
 
-        // 5. [중요] Citizens Trait 등록
+        // 5. Citizens Trait 등록
         if (getServer().getPluginManager().getPlugin("Citizens") != null) {
+            // [수정] traits 패키지의 클래스를 사용하여 등록
             CitizensAPI.getTraitFactory().registerTrait(
                 TraitInfo.create(VanillaShopTrait.class).withName("vanilla_shop")
             );
@@ -79,8 +80,10 @@ public class NexusCore extends JavaPlugin {
         // 6. 명령어 및 리스너 등록
         registerCommands();
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
+        // AugmentManager도 이벤트를 처리하므로 등록 필요
+        getServer().getPluginManager().registerEvents(augmentManager, this);
 
-        getLogger().info("✔ NexusProject 시스템 가동 중...");
+        getLogger().info("✔ NexusProject 시스템이 정상적으로 활성화되었습니다.");
     }
 
     @Override
@@ -99,7 +102,6 @@ public class NexusCore extends JavaPlugin {
         econ = getServer().getServicesManager().getRegistration(Economy.class).getProvider();
     }
 
-    // --- 설정 파일 관련 ---
     private void createMarketConfig() {
         marketFile = new File(getDataFolder(), "market.yml");
         if (!marketFile.exists()) saveResource("market.yml", false);
@@ -121,7 +123,7 @@ public class NexusCore extends JavaPlugin {
     public static Economy getEconomy() { return econ; }
     
     public DatabaseManager getDatabaseManager() { return databaseManager; }
-    public DatabaseManager getDbManager() { return databaseManager; } // UserManager용 별칭
+    public DatabaseManager getDbManager() { return databaseManager; } // UserManager 호환용 별칭
 
     public UserManager getUserManager() { return userManager; }
     public VanillaShopManager getVanillaShopManager() { return vanillaShopManager; }
