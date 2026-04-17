@@ -1,0 +1,84 @@
+# ==========================================
+# 중앙 시장 설정 파일 (카테고리형)
+# ==========================================
+
+shop-settings:
+  title: "&0&l[ 중앙 시장 ]"
+  main-size: 27      # 카테고리 선택 창 크기
+  category-size: 54  # 실제 물건 판매 창 크기
+
+categories:
+  # ------------------------------------------
+  # 1. 블록 상점 (카테고리 키: blocks)
+  # ------------------------------------------
+  blocks:
+    display-name: "&e&l건축 블록 상점"
+    material: GRASS_BLOCK
+    slot: 11
+    items:
+      stone:
+        material: STONE
+        slot: 10
+        display-name: "&f부드러운 돌"
+        buy-price: 10.0
+        sell-price: 2.0
+        lore:
+          - "&7가장 기본적인 건축 자재입니다."
+      cobblestone:
+        material: COBBLESTONE
+        slot: 11
+        display-name: "&7조약돌"
+        buy-price: 5.0
+        sell-price: 1.0
+        lore:
+          - "&7거친 질감의 흔한 돌입니다."
+
+  # ------------------------------------------
+  # 2. 농사 상점 (카테고리 키: farming)
+  # ------------------------------------------
+  farming:
+    display-name: "&a&l신선한 농산물"
+    material: WHEAT
+    slot: 13
+    items:
+      wheat:
+        material: WHEAT
+        slot: 10
+        display-name: "&e밀"
+        buy-price: 30.0
+        sell-price: 10.0
+        lore:
+          - "&7빵의 주재료가 되는 작물입니다."
+      carrot:
+        material: CARROT
+        slot: 11
+        display-name: "&6당근"
+        buy-price: 50.0
+        sell-price: 15.0
+        lore:
+          - "&7말이 좋아하는 주황색 채소입니다."
+
+  # ------------------------------------------
+  # 3. 광물 상점 (카테고리 키: minerals)
+  # ------------------------------------------
+  minerals:
+    display-name: "&b&l희귀 광물 거래소"
+    material: DIAMOND_ORE
+    slot: 15
+    items:
+      diamond:
+        material: DIAMOND
+        slot: 10
+        display-name: "&b다이아몬드"
+        buy-price: 2000.0
+        sell-price: 700.0
+        lore:
+          - "&7지하 깊은 곳에서 발견되는 보석입니다."
+      iron_ingot:
+        material: IRON_INGOT
+        slot: 11
+        display-name: "&f철 주괴"
+        buy-price: 300.0
+        sell-price: 100.0
+        lore:
+          - "&7다양한 도구 제작의 핵심 재료입니다."
