@@ -11,6 +11,10 @@ import main_plugin.gui.VanillaShopManager;
 import main_plugin.politics.SiegeManager;
 import main_plugin.user.PlayerListener;
 import main_plugin.user.UserManager;
+import main_plugin.traits.VanillaShopTrait; // Trait 클래스 경로 확인 필요
+
+import net.citizensnpcs.api.CitizensAPI;
+import net.citizensnpcs.api.trait.TraitInfo;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -28,8 +32,6 @@ public class NexusCore extends JavaPlugin {
     private UserManager userManager;
     private VanillaShopManager vanillaShopManager;
     private PointShopManager pointShopManager;
-    
-    // 추가: 다른 시스템 매니저들
     private AugmentManager augmentManager;
     private SiegeManager siegeManager;
 
@@ -44,7 +46,7 @@ public class NexusCore extends JavaPlugin {
         saveDefaultConfig();
         createMarketConfig();
 
-        // 2. DB 연결
+        // 2. DB 연결 (getDbManager 호환)
         this.databaseManager = new DatabaseManager(this);
         databaseManager.connect(
             getConfig().getString("database.host", "localhost"),
@@ -59,24 +61,31 @@ public class NexusCore extends JavaPlugin {
             setupEconomy();
         }
 
-        // 4. 매니저들 초기화 (순서 주의)
+        // 4. 매니저 초기화
         this.userManager = new UserManager(this);
         this.augmentManager = new AugmentManager(this);
         this.siegeManager = new SiegeManager(this);
         this.vanillaShopManager = new VanillaShopManager(this);
         this.pointShopManager = new PointShopManager(this);
 
-        // 5. 명령어 및 리스너 등록
+        // 5. [중요] Citizens Trait 등록
+        if (getServer().getPluginManager().getPlugin("Citizens") != null) {
+            CitizensAPI.getTraitFactory().registerTrait(
+                TraitInfo.create(VanillaShopTrait.class).withName("vanilla_shop")
+            );
+            getLogger().info("✔ Citizens Trait 'vanilla_shop' 등록 완료!");
+        }
+
+        // 6. 명령어 및 리스너 등록
         registerCommands();
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
 
-        getLogger().info("✔ NexusProject 시스템이 완전히 가동되었습니다.");
+        getLogger().info("✔ NexusProject 시스템 가동 중...");
     }
 
     @Override
     public void onDisable() {
         if (databaseManager != null) databaseManager.close();
-        getLogger().info("❌ NexusProject가 종료되었습니다.");
     }
 
     private void registerCommands() {
@@ -90,13 +99,10 @@ public class NexusCore extends JavaPlugin {
         econ = getServer().getServicesManager().getRegistration(Economy.class).getProvider();
     }
 
-    // --- 설정 관리 메서드 ---
-
+    // --- 설정 파일 관련 ---
     private void createMarketConfig() {
         marketFile = new File(getDataFolder(), "market.yml");
-        if (!marketFile.exists()) {
-            saveResource("market.yml", false);
-        }
+        if (!marketFile.exists()) saveResource("market.yml", false);
         marketConfig = YamlConfiguration.loadConfiguration(marketFile);
     }
 
@@ -106,25 +112,20 @@ public class NexusCore extends JavaPlugin {
         marketFile = new File(getDataFolder(), "market.yml");
         marketConfig = YamlConfiguration.loadConfiguration(marketFile);
         reloadConfig();
-        // 리로드 시 매니저들에게도 알림이 필요하다면 여기서 호출
         if (augmentManager != null) augmentManager.loadConfigs();
-        getLogger().info("⚙ 모든 설정 파일이 리로드되었습니다.");
+        getLogger().info("⚙ 설정 파일 리로드 완료.");
     }
 
-    // --- Getter 메서드 (빌드 에러 해결 포인트) ---
-
+    // --- Getter 메서드 ---
     public static NexusCore getInstance() { return instance; }
     public static Economy getEconomy() { return econ; }
     
-    // 타 클래스에서 getDbManager()와 getDatabaseManager() 둘 다 대응
     public DatabaseManager getDatabaseManager() { return databaseManager; }
-    public DatabaseManager getDbManager() { return databaseManager; } 
+    public DatabaseManager getDbManager() { return databaseManager; } // UserManager용 별칭
 
     public UserManager getUserManager() { return userManager; }
     public VanillaShopManager getVanillaShopManager() { return vanillaShopManager; }
     public PointShopManager getPointShopManager() { return pointShopManager; }
-    
-    // 리턴 타입을 Object에서 실제 클래스로 변경
     public AugmentManager getAugmentManager() { return augmentManager; }
     public SiegeManager getSiegeManager() { return siegeManager; }
 }
