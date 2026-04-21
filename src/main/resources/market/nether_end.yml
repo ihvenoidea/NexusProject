@@ -1,0 +1,54 @@
+# 넥서스 서버 상점 - 차원 전리품 카테고리 (nether_end.yml)
+display-name: "&5[ 차원 전리품 ]"
+material: END_CRYSTAL
+slot: 17 # 메인 메뉴(중앙 시장)에서의 아이콘 위치
+
+items:
+  nether_wart:
+    material: NETHER_WART
+    display-name: "&c네더 와트"
+    buy-price: 500
+    sell-price: 150
+    slot: 10
+  blaze_rod:
+    material: BLAZE_ROD
+    display-name: "&e블레이즈 막대"
+    buy-price: 1000
+    sell-price: 300
+    slot: 11
+  ghast_tear:
+    material: GHAST_TEAR
+    display-name: "&f가스트의 눈물"
+    buy-price: 2500
+    sell-price: 800
+    slot: 12
+  ender_pearl:
+    material: ENDER_PEARL
+    display-name: "&5엔더 진주"
+    buy-price: 800
+    sell-price: 200
+    slot: 13
+  chorus_fruit:
+    material: CHORUS_FRUIT
+    display-name: "&d후렴과"
+    buy-price: 300
+    sell-price: 100
+    slot: 14
+  shulker_shell:
+    material: SHULKER_SHELL
+    display-name: "&5셜커 껍데기"
+    buy-price: -1 # 제작 및 파밍 권장
+    sell-price: 5000
+    slot: 15
+  magma_cream:
+    material: MAGMA_CREAM
+    display-name: "&6마그마 크림"
+    buy-price: 800
+    sell-price: 250
+    slot: 19
+  phantom_membrane:
+    material: PHANTOM_MEMBRANE
+    display-name: "&f팬텀의 막"
+    buy-price: 1500
+    sell-price: 400
+    slot: 20

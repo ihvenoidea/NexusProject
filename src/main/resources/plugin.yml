@@ -1,0 +1,57 @@
+name: NexusCore
+version: 1.0
+main: main_plugin.NexusCore
+api-version: '1.21'
+depend: [Citizens] # 환급 NPC를 위해 Citizens 플러그인이 필수로 필요합니다.
+softdepend: [Towny] # 타운 시스템 연동용
+
+commands:
+  # ==========================================
+  # [ 신규 시스템 명령어 ]
+  # ==========================================
+  숙련도:
+    description: 넥서스 생활 숙련도 시스템 메인 명령어
+    usage: /숙련도 [전직|랭킹|경험치|초기화]
+    aliases: [mastery, job, 직업]
+
+  # ==========================================
+  # [ 관리자 전용 명령어 ]
+  # ==========================================
+  setitem:
+    description: 넥서스 세트 장비 관리자 전용 명령어
+    usage: /setitem <세트이름> <부위>
+    permission: nexuscore.admin
+    permission-message: §c[!] 권한이 없습니다.
+
+  # ==========================================
+  # [ 기존 시스템 명령어 (대화 기반 복원) ]
+  # ==========================================
+  메뉴:
+    description: 넥서스 서버 퀵 메뉴 오픈
+    usage: /메뉴
+    aliases: [menu]
+
+  거래소:
+    description: 유저 간 아이템 글로벌 거래소 오픈
+    usage: /거래소
+    aliases: [exchange, 시장]
+
+  도감:
+    description: 아이템 수집 및 보상 도감 오픈
+    usage: /도감
+    aliases: [collection]
+
+  강화:
+    description: 대장간 장비 강화 메뉴 오픈
+    usage: /강화
+    aliases: [enhance]
+
+  타운:
+    description: 타운(마을) 영토 및 멤버 관리
+    usage: /타운
+    aliases: [town]
+
+permissions:
+  nexuscore.admin:
+    description: 넥서스 코어의 모든 관리자 명령어 사용 권한
+    default: op
