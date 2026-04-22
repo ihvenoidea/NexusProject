@@ -1,0 +1,66 @@
+# 넥서스 서버 상점 - 광물 카테고리 (minerals.yml)
+display-name: "&6[ 광물 상점 ]"
+material: DIAMOND_PICKAXE
+slot: 10 # 메인 메뉴(중앙 시장)에서의 아이콘 위치
+
+items:
+  coal:
+    material: COAL
+    display-name: "&f석탄"
+    buy-price: 150
+    sell-price: 50
+    slot: 10
+  iron:
+    material: IRON_INGOT
+    display-name: "&f철 주괴"
+    buy-price: 300
+    sell-price: 80
+    slot: 11
+  gold:
+    material: GOLD_INGOT
+    display-name: "&e금 주괴"
+    buy-price: -1 # -1은 구매 불가 (파밍 권장)
+    sell-price: 100
+    slot: 12
+  diamond:
+    material: DIAMOND
+    display-name: "&b다이아몬드"
+    buy-price: -1
+    sell-price: 500
+    slot: 13
+  emerald:
+    material: EMERALD
+    display-name: "&a에메랄드"
+    buy-price: 1000
+    sell-price: 200
+    slot: 14
+  netherite:
+    material: NETHERITE_INGOT
+    display-name: "&d네더라이트 주괴"
+    buy-price: -1
+    sell-price: 2500
+    slot: 15
+  copper:
+    material: COPPER_INGOT
+    display-name: "&6구리 주괴"
+    buy-price: 200
+    sell-price: 60
+    slot: 19
+  redstone:
+    material: REDSTONE
+    display-name: "&c레드스톤 가루"
+    buy-price: 150
+    sell-price: 40
+    slot: 20
+  lapis:
+    material: LAPIS_LAZULI
+    display-name: "&9청금석"
+    buy-price: 200
+    sell-price: 50
+    slot: 21
+  quartz:
+    material: QUARTZ
+    display-name: "&f네더 석영"
+    buy-price: 250
+    sell-price: 70
+    slot: 22

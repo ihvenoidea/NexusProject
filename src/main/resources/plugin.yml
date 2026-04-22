@@ -1,0 +1,85 @@
+name: NexusCore
+version: 1.0
+main: main_plugin.NexusCore
+api-version: '1.21'
+depend: [Citizens]
+softdepend: [PlaceholderAPI, Towny]
+
+commands:
+  숙련도:
+    description: 넥서스 생활 숙련도 시스템 메인 명령어
+    usage: /숙련도 [전직|랭킹|경험치|초기화]
+    aliases: [mastery, job, 직업]
+  setitem:
+    description: 넥서스 세트 장비 관리자 전용 명령어
+    usage: /setitem <세트이름> <부위>
+    permission: nexus.admin
+  메뉴:
+    description: 넥서스 서버 퀵 메뉴 오픈
+    usage: /메뉴
+    aliases: [menu]
+  거래소:
+    description: 유저 간 아이템 글로벌 거래소 오픈
+    usage: /거래소
+    aliases: [exchange, 시장]
+  판매:
+    description: 거래소에 내 아이템을 등록합니다.
+    usage: /판매 <금액> <돈/dp>
+  도감:
+    description: 아이템 수집 및 보상 도감 오픈
+    usage: /도감
+    aliases: [collection]
+  강화:
+    description: 대장간 장비 강화 메뉴 오픈
+    usage: /강화
+    aliases: [enhance]
+  타운:
+    description: 타운(마을) 영토 및 멤버 관리
+    usage: /타운
+    aliases: [town]
+  money:
+    description: 돈(재화) 확인 및 관리
+    usage: /money [확인|지급|차감|설정] <유저>
+  dp:
+    description: 디스코드 포인트 확인 및 관리
+    usage: /dp [확인|지급|차감|설정] <유저>
+  포인트:
+    description: DP 포인트 상점을 엽니다.
+    usage: /포인트
+  상점:
+    description: 바닐라 아이템 상점을 엽니다.
+    usage: /상점
+  nexus:
+    description: 넥서스 코어 관리자 명령어 (리로드, 가챠상자 지정 등)
+    usage: /nexus [reload|setgacha]
+    permission: nexus.admin
+  공성전:
+    description: 코어 레이드 관리자 명령어
+    usage: /공성전 [코어설정|시작|종료]
+    permission: nexus.admin
+  조공:
+    description: 서버에 DP를 조공합니다.
+    usage: /조공 <금액>
+  조공순위:
+    description: 현재 조공 랭킹을 확인합니다.
+    usage: /조공순위
+  조공종료:
+    description: 조공 이벤트를 수동으로 종료하고 정산합니다.
+    usage: /조공종료
+    permission: nexus.admin
+  우편함:
+    description: 내 개인 우편함을 엽니다.
+    usage: /우편함
+  우편보내기:
+    description: 다른 유저에게 손에 든 아이템을 우편으로 보냅니다.
+    usage: /우편보내기 <닉네임|all> <메시지>
+    permission: nexus.admin
+  잠수:
+    description: 쾌적한 잠수 서버로 이동합니다.
+    usage: /잠수
+    aliases: [afk]
+
+permissions:
+  nexus.admin:
+    description: 넥서스 코어의 모든 관리자 명령어 사용 권한
+    default: op

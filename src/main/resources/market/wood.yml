@@ -1,0 +1,66 @@
+# 넥서스 서버 상점 - 목재소 카테고리 (wood.yml)
+display-name: "&e[ 목재소 ]"
+material: OAK_LOG
+slot: 12 # 메인 메뉴(중앙 시장)에서의 아이콘 위치
+
+items:
+  oak_log:
+    material: OAK_LOG
+    display-name: "&f참나무 원목"
+    buy-price: 120
+    sell-price: 40
+    slot: 10
+  spruce_log:
+    material: SPRUCE_LOG
+    display-name: "&f가문비나무 원목"
+    buy-price: 120
+    sell-price: 40
+    slot: 11
+  birch_log:
+    material: BIRCH_LOG
+    display-name: "&f자작나무 원목"
+    buy-price: 120
+    sell-price: 40
+    slot: 12
+  jungle_log:
+    material: JUNGLE_LOG
+    display-name: "&f정글나무 원목"
+    buy-price: 120
+    sell-price: 40
+    slot: 13
+  acacia_log:
+    material: ACACIA_LOG
+    display-name: "&f아카시아나무 원목"
+    buy-price: 120
+    sell-price: 40
+    slot: 14
+  dark_oak_log:
+    material: DARK_OAK_LOG
+    display-name: "&f짙은 참나무 원목"
+    buy-price: 120
+    sell-price: 40
+    slot: 15
+  mangrove_log:
+    material: MANGROVE_LOG
+    display-name: "&d맹그로브나무 원목"
+    buy-price: 150
+    sell-price: 50
+    slot: 16
+  cherry_log:
+    material: CHERRY_LOG
+    display-name: "&d벚나무 원목"
+    buy-price: 150
+    sell-price: 50
+    slot: 17
+  crimson_stem:
+    material: CRIMSON_STEM
+    display-name: "&c진홍빛 자루"
+    buy-price: 180
+    sell-price: 60
+    slot: 21
+  warped_stem:
+    material: WARPED_STEM
+    display-name: "&3뒤틀린 자루"
+    buy-price: 180
+    sell-price: 60
+    slot: 23

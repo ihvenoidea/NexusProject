@@ -1,0 +1,81 @@
+# 넥서스 서버 상점 - 인테리어 및 조명 카테고리 (decoration.yml)
+display-name: "&e[ 인테리어 및 조명 ]"
+material: LANTERN
+slot: 15 # 메인 메뉴(중앙 시장)에서의 아이콘 위치
+
+items:
+  # --- 조명 기구 ---
+  glowstone:
+    material: GLOWSTONE
+    display-name: "&e발광석"
+    buy-price: 400
+    sell-price: 100
+    slot: 10
+  glowstone_dust:
+    material: GLOWSTONE_DUST
+    display-name: "&e발광석 가루"
+    buy-price: 200
+    sell-price: 50
+    slot: 11
+  sea_lantern:
+    material: SEA_LANTERN
+    display-name: "&f바다 랜턴"
+    buy-price: 1500
+    sell-price: 400
+    slot: 12
+  shroomlight:
+    material: SHROOMLIGHT
+    display-name: "&6버섯불"
+    buy-price: 800
+    sell-price: 200
+    slot: 13
+  lantern:
+    material: LANTERN
+    display-name: "&f랜턴"
+    buy-price: 150
+    sell-price: 30
+    slot: 14
+  soul_lantern:
+    material: SOUL_LANTERN
+    display-name: "&b영혼 랜턴"
+    buy-price: 200
+    sell-price: 40
+    slot: 15
+  sea_pickle:
+    material: SEA_PICKLE
+    display-name: "&e불광석(군소)"
+    buy-price: 600
+    sell-price: 150
+    slot: 16
+
+  # --- 자연 및 기초 장식 블록 ---
+  dirt:
+    material: DIRT
+    display-name: "&6흙"
+    buy-price: 30
+    sell-price: 5
+    slot: 19
+  sand:
+    material: SAND
+    display-name: "&e모래"
+    buy-price: 50
+    sell-price: 10
+    slot: 20
+  gravel:
+    material: GRAVEL
+    display-name: "&7자갈"
+    buy-price: 50
+    sell-price: 10
+    slot: 21
+  mud:
+    material: MUD
+    display-name: "&6진흙"
+    buy-price: 100
+    sell-price: 20
+    slot: 22
+  clay:
+    material: CLAY
+    display-name: "&f점토"
+    buy-price: 150
+    sell-price: 30
+    slot: 23
